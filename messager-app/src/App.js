@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 
 import Root from "./Root";
+import Account from "./Account";
 
 const router = createBrowserRouter([
   {
@@ -22,16 +23,19 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
+        // Unauth path {state.user == null}
         path: "login",
         element: <Login />,
       },
       {
+        // Unauth path {state.user == null}
         path: "registration",
         element: <Registration />,
       },
       {
-        path: "chat",
-        element: <Registration />,
+        // Auth path {state.user != null}
+        path: "account",
+        element: <Account />,
       },
     ],
   },

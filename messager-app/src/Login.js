@@ -10,9 +10,14 @@ import {
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Login = () => {
+  console.log("Login component rendering");
+
+  const a = 34 + 6;
+  console.log(a);
+
   const [state, setState] = useState({
     login: "",
     password: "",
@@ -20,7 +25,9 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  console.log("rerender");
+  useEffect(() => {
+    console.log("Component displayed");
+  }, []);
 
   const onLogin = () => {
     if (state.login.length == 0 || state.password.length == 0) {
@@ -66,8 +73,7 @@ const Login = () => {
             <TextField
               hiddenLabel
               id="login"
-              defaultValue=""
-              label="Logim"
+              label="Login"
               value={state.login}
               onChange={(event) => {
                 setState({
@@ -81,7 +87,6 @@ const Login = () => {
               hiddenLabel
               type="password"
               id="password"
-              defaultValue=""
               label="Password"
               value={state.password}
               onChange={(event) => {

@@ -86,7 +86,6 @@ const Registration = () => {
             <TextField
               hiddenLabel
               id="login"
-              defaultValue=""
               label="Login"
               value={state.login}
               onChange={(event) => {
@@ -100,7 +99,6 @@ const Registration = () => {
             <TextField
               hiddenLabel
               id="name"
-              defaultValue=""
               label="Name"
               value={state.name}
               onChange={(event) => {
@@ -112,7 +110,6 @@ const Registration = () => {
               hiddenLabel
               type="password"
               id="password"
-              defaultValue=""
               label="Password"
               value={state.password}
               onChange={(event) => {
@@ -127,7 +124,6 @@ const Registration = () => {
               hiddenLabel
               type="password"
               id="password_confirm"
-              defaultValue=""
               label="Confirm password"
               value={state.confirmPassword}
               onChange={(event) => {
