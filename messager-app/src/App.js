@@ -17,6 +17,11 @@ import {
 import Root from "./Root";
 import Account from "./Account";
 
+import Auth from "./Auth";
+import Unauth from "./Unauth";
+import MyTest from "./RefsContext";
+import PublicRoute from "./PublicRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,17 +30,30 @@ const router = createBrowserRouter([
       {
         // Unauth path {state.user == null}
         path: "login",
-        element: <Login />,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
         // Unauth path {state.user == null}
         path: "registration",
-        element: <Registration />,
+        element: (
+          <PublicRoute>
+            <Registration />
+          </PublicRoute>
+        ),
       },
       {
-        // Auth path {state.user != null}
-        path: "account",
-        element: <Account />,
+        path: "auth/",
+        element: <Auth />,
+        children: [
+          {
+            path: "account",
+            element: <Account />,
+          },
+        ],
       },
     ],
   },
@@ -43,28 +61,6 @@ const router = createBrowserRouter([
 
 function App() {
   return <RouterProvider router={router} />;
-  // return (
-  //   <div className="App">
-  //     <Login />
-  //     <Registration />
-  //     <Counter />
-  //     <Report />
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
 }
 
 export default App;

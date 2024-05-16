@@ -9,8 +9,11 @@ import {
   Link,
 } from "@mui/material";
 
+import { createPortal } from "react-dom";
+
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "./UserContext";
 
 const Registration = () => {
   const [state, setState] = useState({
@@ -20,6 +23,8 @@ const Registration = () => {
     confirmPassword: "",
     error: "",
   });
+
+  const { elementRef } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -68,11 +73,12 @@ const Registration = () => {
             ) : (
               ""
             )}
-            {state.error == "bad-login-param" ? (
-              <Alert severity="warning">Invalid Login.</Alert>
-            ) : (
-              ""
-            )}
+            {state.error == "bad-login-param"
+              ? createPortal(
+                  <Alert severity="warning">Invalid Login.</Alert>,
+                  elementRef.current
+                )
+              : ""}
             {state.error == "bad-password-param" ? (
               <Alert severity="warning">Invalid password.</Alert>
             ) : (

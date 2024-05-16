@@ -9,25 +9,24 @@ import {
   Alert,
 } from "@mui/material";
 
+import { createPortal } from "react-dom";
+
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "./UserContext";
 
 const Login = () => {
   console.log("Login component rendering");
-
-  const a = 34 + 6;
-  console.log(a);
 
   const [state, setState] = useState({
     login: "",
     password: "",
     invalid: false,
   });
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("Component displayed");
-  }, []);
+  const { elementRef } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const onLogin = () => {
     if (state.login.length == 0 || state.password.length == 0) {
@@ -65,11 +64,12 @@ const Login = () => {
         <CardHeader title="Login" />
         <CardContent>
           <Stack spacing={2}>
-            {state.invalid ? (
-              <Alert severity="warning">Invalid login or password.</Alert>
-            ) : (
-              ""
-            )}
+            {state.invalid
+              ? createPortal(
+                  <Alert severity="warning">Invalid login or password.</Alert>,
+                  elementRef.current
+                )
+              : ""}
             <TextField
               hiddenLabel
               id="login"

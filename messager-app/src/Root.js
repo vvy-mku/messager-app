@@ -1,17 +1,19 @@
-import Login from "./Login";
+import { Outlet } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
-import { Link, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
 
 import UserContext from "./UserContext";
+
+import BannerPlacement from "./BannerPlacement";
 
 const Root = () => {
   const [state, setState] = useState({
     user: null,
     loaded: false,
   });
+
+  const elementRef = useRef(null);
 
   useEffect(() => {
     fetch("/api/auth/login")
@@ -32,19 +34,24 @@ const Root = () => {
   console.log("User:");
   console.log(state.user);
 
+  const data = {
+    user: state.user,
+    loaded: state.loaded,
+    message: "hello world",
+    change: (my) => setState({ ...state, message: my }),
+    elementRef,
+  };
+
   return (
-    <div>
-      <header>
-        <Link to="login">Login</Link>
-        {" | "}
-        <Link to="registration">Registration</Link>
-      </header>
+    <UserContext.Provider value={data}>
       <div>
-        <UserContext.Provider value={state.user}>
+        <BannerPlacement />
+        <Divider />
+        <div>
           <Outlet />
-        </UserContext.Provider>
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 };
 
