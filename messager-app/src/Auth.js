@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import UserContext from "./UserContext";
 
-const Auth = ({ children }) => {
+const Auth = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -12,7 +13,7 @@ const Auth = ({ children }) => {
 
   if (!user) return "";
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default Auth;

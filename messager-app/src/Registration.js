@@ -15,6 +15,10 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserContext from "./UserContext";
 
+import testFunction from "./test-module";
+
+testFunction("regeistration");
+
 const Registration = () => {
   const [state, setState] = useState({
     login: "",
@@ -50,7 +54,7 @@ const Registration = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.ok) {
-          navigate("/account");
+          navigate("/auth/account");
         } else {
           setState({ ...state, error: data.error });
         }

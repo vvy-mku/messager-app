@@ -18,8 +18,6 @@ import Root from "./Root";
 import Account from "./Account";
 
 import Auth from "./Auth";
-import Unauth from "./Unauth";
-import MyTest from "./RefsContext";
 import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([

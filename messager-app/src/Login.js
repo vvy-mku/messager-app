@@ -12,8 +12,12 @@ import {
 import { createPortal } from "react-dom";
 
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import UserContext from "./UserContext";
+
+import testFunction from "./test-module";
+
+testFunction("login");
 
 const Login = () => {
   console.log("Login component rendering");
@@ -28,7 +32,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const onLogin = () => {
+  const onLogin = useCallback(() => {
     if (state.login.length == 0 || state.password.length == 0) {
       setState({ ...state, invalid: true });
       return;
@@ -56,7 +60,19 @@ const Login = () => {
         }
       })
       .catch(() => {});
-  };
+  }, [state.login, state.password]);
+
+  // const m =
+  // useMemo()
+
+  const m = useMemo(() => {
+    let m = 0;
+    for (let i = 0; i <= 10000; i++) {
+      console.log(i);
+      m = m + i;
+    }
+    return m;
+  }, []);
 
   return (
     <Stack justifyContent="center" alignItems="center" sx={{ height: "100vh" }}>
@@ -70,6 +86,7 @@ const Login = () => {
                   elementRef.current
                 )
               : ""}
+            {m}
             <TextField
               hiddenLabel
               id="login"
